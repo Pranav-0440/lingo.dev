@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>⚡ Lingo.dev - විවෘත-මූලාශ්‍ර, AI-ශක්තිගත i18n toolkit එකක් වන අතර LLMs භාවිතා කර මොහොතකින් ස්ථානීය කිරීමක් (localization) සඳහා නිර්මාණය කර ඇත.</strong>
+  <strong>⚡ Lingo.dev - විවෘත මූලාශ්‍ර, AI බලගැන්වූ i18n toolkit එකක් — LLMs භාවිතයෙන්ක් අත්‍යවශ්‍ය පරිවර්තන තත්ක්ෂණයකින්.</strong>
 </p>
 
 <br />
@@ -43,17 +43,18 @@
 
 ---
 
-## Compiler හඳුන්වා දෙමු 🆕
+## Compiler එකට හමු වන්න 🆕
 
-**Lingo.dev Compiler** යනු නොමිලේ, විවෘත-මූලාශ්‍ර compiler middleware එකක් වන අතර එය React අයදුම්පතක් බහු භාෂා සහය සහිතව නිම කිරීමේදී (build-time) සකස් කරයි — React කොම්පෝනන්ට් එකකට කිසිදු වෙනසක් නැතිව.
+**Lingo.dev Compiler** යනු React apps multilingual කිරීම build-time දී සිදුකරන, සම්පූර්ණයෙන්ම විවෘත මූලාශ්‍ර middleware compiler එකක්.  
+React components කිසිවෙකුත් වෙනස් නොකර — ඔබේ project එක බහුභාෂාගත (multilingual) කරයි.
 
-Install කිරීම:
+එකවර install කරන්න:
 
 ```bash
 npm install lingo.dev
 ```
 
-Build config එකට සක්‍රීය කිරීම:
+Build config එකේ enable කරන්න:
 
 ```js
 import lingoCompiler from "lingo.dev/compiler";
@@ -66,36 +67,43 @@ export default lingoCompiler.next({
 })(existingNextConfig);
 ```
 
-`next build` ධාවනය කර, ස්පැනිෂ් සහ ප්‍රංශ භාෂා bundle මැදිහත්වෙමින් නිකුත් වීම නරඹන්න ✨
+ඊට පසුව `next build` ක්‍රියාත්මක කරන්න — Spanish සහ French builds magically generate වෙයි ✨
+
+සම්පූර්ණ මාර්ගෝපදේශය සඳහා [docs කියවන්න →](https://lingo.dev/compiler)  
+සහ ඔබට උදව් අවශ්‍ය නම් [Discord එකට එක්වන්න](https://lingo.dev/go/discord).
 
 ---
 
-### මේ repo එක ඇතුළත තියෙන්නේ මොනවද?
+### මෙය repo එක තුලදී තියෙන්නේ?
 
-| මෙවලම | කෙටි විස්තරය | ලේඛන |
-| -------- | -------------------------------- | -------------------------------- |
-| **Compiler** | React අයදුම්පත් සඳහා Build-time ස්ථානීය කිරීම | [/compiler](https://lingo.dev/compiler) |
-| **CLI** | වෙබ් සහ ජංගම අයදුම්පත් සඳහා එක පණිවිඩයකින් ස්ථානීය කිරීම | [/cli](https://lingo.dev/cli) |
-| **CI/CD** | Push එක්ක translation commit කිරීම හා pull request සෑදීම | [/ci](https://lingo.dev/ci) |
-| **SDK** | පරිශීලක අන්තර්ගතය සඳහා ක්ෂණික ස්ථානීය කිරීම | [/sdk](https://lingo.dev/sdk) |
+| මෙවලම        | කෙටි විස්තර                                            | ලේඛන                                    |
+| ------------ | ------------------------------------------------------ | --------------------------------------- |
+| **Compiler** | Build-time React localization                          | [/compiler](https://lingo.dev/compiler) |
+| **CLI**      | Web & mobile apps සඳහා එකම command එකකින් localization | [/cli](https://lingo.dev/cli)           |
+| **CI/CD**    | Push එකකින් පසුව auto-commit + pull requests           | [/ci](https://lingo.dev/ci)             |
+| **SDK**      | Dynamic content real-time translation                  | [/sdk](https://lingo.dev/sdk)           |
+
+පහලින් tool එකකට tool එක quick summary තියෙනවා 👇
 
 ---
 
 ### ⚡️ Lingo.dev CLI
 
-Terminal එකෙන්ම අන්තර්ගතය පරිවර්තනය කරන්න.
+ඔබේ terminal එකෙන්ම code & content translate කරන්න.
 
 ```bash
 npx lingo.dev@latest run
 ```
 
-මෙය සියලු string හඳුනාගෙන, cache කර, වෙනස් වූ අලුත් දේවල් පමණක් නැවත පරිවර්තනය කරයි.
+මෙය string fingerprinting, caching, සහ incremental translation logic භාවිතා කරයි.
+
+Setup ගැන දැනගැනීමට [docs බලන්න →](https://lingo.dev/cli).
 
 ---
 
 ### 🔄 Lingo.dev CI/CD
 
-ස්වයංක්‍රීයව නිවැරදි පරිවර්තන ලබා දෙන්න.
+පරිපූර්ණ පරිවර්තන ස්වයංක්‍රීයව deploy කරන්න.
 
 ```yaml
 # .github/workflows/i18n.yml
@@ -112,13 +120,15 @@ jobs:
           api-key: ${{ secrets.LINGODOTDEV_API_KEY }}
 ```
 
-ඔබේ repo එක පරිපූර්ණ තත්ත්වයෙන් තබා ගන්න.
+මෙය repo එක හරිත තත්වයේ (green) තබා ගෙන product එක multilingual කරයි — කිසිදු manual step එකක් නැතුව.
+
+[Docs →](https://lingo.dev/ci)
 
 ---
 
 ### 🧩 Lingo.dev SDK
 
-Dynamic content සඳහා ක්ෂණික පරිවර්තන.
+Dynamic user content සඳහා real-time translation.
 
 ```ts
 import { LingoDotDevEngine } from "lingo.dev/sdk";
@@ -135,35 +145,37 @@ const content = {
 
 const translated = await lingoDotDev.localizeObject(content, {
   sourceLocale: "en",
-  targetLocale: "si",
+  targetLocale: "es",
 });
-// Returns: { greeting: "හෙලෝ", farewell: "ගුඩ්බයි", message: "අපේ වේදිකාවට සාදරයෙන් පිළිගනිමු" }
 ```
 
-චැට්, පරිශීලක අදහස්, සහ ක්ෂණික පරිවර්තන අවශ්‍ය දේවල් සඳහා පරිපූර්ණයි.
+ඒක chat apps, live comments, message feeds වැනි real-time flows සඳහා සුපිරි.
+
+[Docs බලන්න →](https://lingo.dev/sdk)
 
 ---
 
-## 🤝 සමූහය (Community)
+## 🤝 ප්‍රජාව
 
-අපි සමූහය මත පදනම් වූ ආයතනයක් — ඔබගේ දායකත්වය සාදරයෙන් පිළිගනිමු!
+අපි community-driven. ඔබගේ දායකත්වය අපිට ප්‍රියයි!
 
-- නව අදහසක් තිබේද? [Issue එකක් විවෘත කරන්න](https://github.com/lingodotdev/lingo.dev/issues)
-- යම් දෙයක් නිවැරදි කිරීමට කැමතිද? [PR එකක් යවන්න](https://github.com/lingodotdev/lingo.dev/pulls)
-- උදව් අවශ්‍යද? [අපේ Discord එකට එක්වන්න](https://lingo.dev/go/discord)
+- අදහසක් ද? [Issue එකක් විවෘත කරන්න](https://github.com/lingodotdev/lingo.dev/issues)
+- කිසිවක් සෙමි කරන්නද? [PR එකක් යවන්න](https://github.com/lingodotdev/lingo.dev/pulls)
+- උදව් එකක් ඕනේද? [Discord එකට එන්න](https://lingo.dev/go/discord)
 
 ---
 
-## ⭐ Star ඉතිහාසය
+## ⭐ තාරා ඉතිහාසය
 
-අපගේ වැඩ ඔබට ප්‍රිය නම්, ⭐ එකක් දෙන්න සහ අපට 4,000 stars පනස් වීමට උදව් කරන්න! 🌟
+ඔබට Lingo.dev සතුටුද? ⭐ එකක් දෙන්න!  
+අපිට 4,000 stars இலக்கு ජයගන්න උදව් කරන්න 🌟
 
 [![Star History Chart](https://api.star-history.com/svg?repos=lingodotdev/lingo.dev&type=Date)](https://www.star-history.com/#lingodotdev/lingo.dev&Date)
 
 ---
 
-## 🌐 වෙනත් භාෂාවල README
+## 🌐 වෙනත් භාෂා පිටපත්
 
-[English](https://github.com/lingodotdev/lingo.dev) • [中文](/readme/zh-Hans.md) • [日本語](/readme/ja.md) • [한국어](/readme/ko.md) • [Español](/readme/es.md) • [Français](/readme/fr.md) • [Русский](/readme/ru.md) • [Українська](/readme/uk-UA.md) • [Deutsch](/readme/de.md) • [Italiano](/readme/it.md) • [العربية](/readme/ar.md) • [עברית](/readme/he.md) • [हिन्दी](/readme/hi.md) • [বাংলা](/readme/bn.md) • [فارسی](/readme/fa.md) • [සිංහල](/readme/si.md)
+[English](https://github.com/lingodotdev/lingo.dev) • [中文](/readme/zh-Hans.md) • [日本語](/readme/ja.md) • [한국어](/readme/ko.md) • [Español](/readme/es.md) • [Français](/readme/fr.md) • [Русский](/readme/ru.md) • [Українська](/readme/uk-UA.md) • [Deutsch](/readme/de.md) • [Italiano](/readme/it.md) • [العربية](/readme/ar.md) • [עברית](/readme/he.md) • [हिन्दी](/readme/hi.md) • [বাংলা](/readme/bn.md) • [فارسی](/readme/fa.md)
 
 ඔබගේ භාෂාව නොපෙනෙනවද? [`i18n.json`](./i18n.json) හි එකතු කර PR එකක් විවෘත කරන්න!
